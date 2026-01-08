@@ -264,7 +264,7 @@ export const PROJECTS: Project[] = [
       "A high-performance, immersive portfolio with hacker aesthetics, custom terminal, and real-time system monitoring.",
     techStack: ["React", "TypeScript", "Framer Motion", "Tailwind CSS", "Web Audio API"],
     sourceLink: "https://github.com/EzzElddin-AbdAllah/cyberpunk-portfolio.git",
-    liveLink: "https://cyberpunk-portfolio-ezz.vercel.app",
+    liveLink: "https://ezz-dev.vercel.app",
     image: "/portfolio.png",
   },
 ];

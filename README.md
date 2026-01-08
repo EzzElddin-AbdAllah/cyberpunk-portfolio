@@ -2,7 +2,7 @@
 
 A high-performance, immersive cyberpunk-themed portfolio built with React, Framer Motion, and Tailwind CSS. Featuring "hacker" aesthetics, interactive terminals, and synthetic audio interfaces.
 
-**Live Demo:** [cyberpunk-portfolio-ezz.vercel.app](https://cyberpunk-portfolio-ezz.vercel.app)
+**Live Demo:** [ezz-dev.vercel.app](https://ezz-dev.vercel.app)
 
 ## 🚀 Key Creative Features
 
