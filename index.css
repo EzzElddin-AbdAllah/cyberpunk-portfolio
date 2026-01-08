@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Suppress system cursor globally on desktop */
+  *,
+  *::before,
+  *::after,
+  a,
+  button,
+  input,
+  textarea,
+  [role="button"] {
+    cursor: none !important;
+  }
+
+  body {
+    @apply bg-cyber-black text-slate-300 overflow-x-hidden;
+  }
+
+  /* Restore default cursor on mobile/tablet */
+  @media (max-width: 1024px) {
+    *,
+    *::before,
+    *::after,
+    a,
+    button,
+    input,
+    textarea,
+    [role="button"],
+    body {
+      cursor: auto !important;
+    }
+  }
+
+  /* Disable text selection while dragging */
+  body[data-dragging="true"] {
+    user-select: none !important;
+  }
+}
+
+/* CRT Scanline Overlay */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.2)
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.6;
+}
+
+/* Clip Path for Cyber Shapes */
+.cyber-clip {
+  clip-path: polygon(
+    10px 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%,
+    0 10px
+  );
+}
+
+.cyber-clip-button {
+  clip-path: polygon(
+    10px 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%,
+    0 10px
+  );
+}
+
+/* Glitch Text Effect */
+.glitch-text {
+  position: relative;
+}
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -1px 0 #ff003c;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -1px 0 #00f0ff;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(13px, 9999px, 81px, 0);
+  }
+  20% {
+    clip: rect(66px, 9999px, 13px, 0);
+  }
+  40% {
+    clip: rect(3px, 9999px, 52px, 0);
+  }
+  60% {
+    clip: rect(59px, 9999px, 7px, 0);
+  }
+  80% {
+    clip: rect(28px, 9999px, 35px, 0);
+  }
+  100% {
+    clip: rect(47px, 9999px, 22px, 0);
+  }
+}
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(69px, 9999px, 33px, 0);
+  }
+  20% {
+    clip: rect(4px, 9999px, 78px, 0);
+  }
+  40% {
+    clip: rect(25px, 9999px, 16px, 0);
+  }
+  60% {
+    clip: rect(85px, 9999px, 4px, 0);
+  }
+  80% {
+    clip: rect(10px, 9999px, 62px, 0);
+  }
+  100% {
+    clip: rect(55px, 9999px, 19px, 0);
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #020205;
+}
+::-webkit-scrollbar-thumb {
+  background: #00f0ff;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff003c;
+}
+
+::selection {
+  background: #00f0ff;
+  color: #000;
+}
