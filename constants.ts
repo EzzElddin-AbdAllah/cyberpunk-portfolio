@@ -214,7 +214,7 @@ export const PROJECTS: Project[] = [
       "Tailwind CSS",
     ],
     sourceLink: "https://github.com/EzzElddin-AbdAllah/issue-tracker",
-    liveLink: "https://issue-tracker-ezzelddin-abdallahs-projects.vercel.app/",
+    liveLink: "https://issue-tracker-ezz.vercel.app",
     image: "/issue-tracker.png",
   },
   {
@@ -230,7 +230,7 @@ export const PROJECTS: Project[] = [
       "React Query",
     ],
     sourceLink: "https://github.com/EzzElddin-AbdAllah/game-hub",
-    liveLink: "https://game-hub-ezzelddin-abdallahs-projects.vercel.app",
+    liveLink: "https://game-hub-ezz.vercel.app",
     image: "/gamehub.png",
   },
   {
@@ -239,7 +239,7 @@ export const PROJECTS: Project[] = [
       "Specialized image annotation tool for computer vision, built to support OCR and ID verification tasks with React Konva.",
     techStack: ["Next.js", "React Konva", "MUI", "React Query", "React Window"],
     sourceLink: "https://github.com/EzzElddin-AbdAllah/annotatify",
-    liveLink: "https://annotatify.vercel.app",
+    liveLink: "https://annotatify-ezz.vercel.app",
     image: "/annotatify.png",
   },
   {
@@ -262,7 +262,13 @@ export const PROJECTS: Project[] = [
     title: "Cyberpunk Portfolio",
     description:
       "A high-performance, immersive portfolio with hacker aesthetics, custom terminal, and real-time system monitoring.",
-    techStack: ["React", "TypeScript", "Framer Motion", "Tailwind CSS", "Web Audio API"],
+    techStack: [
+      "React",
+      "TypeScript",
+      "Framer Motion",
+      "Tailwind CSS",
+      "Web Audio API",
+    ],
     sourceLink: "https://github.com/EzzElddin-AbdAllah/cyberpunk-portfolio.git",
     liveLink: "https://ezz-dev.vercel.app",
     image: "/portfolio.png",
