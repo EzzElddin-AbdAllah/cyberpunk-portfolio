@@ -1,6 +1,6 @@
 import DecryptText from "@/components/DecryptText";
 import { PROJECTS } from "@/constants";
-import { track } from "@vercel/analytics";
+import posthog from "posthog-js";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 
@@ -86,7 +86,7 @@ const Projects = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() =>
-                          track("Project Source Click", {
+                          posthog.capture("Project Source Click", {
                             project: project.title,
                           })
                         }
@@ -102,7 +102,7 @@ const Projects = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() =>
-                          track("Project Live Click", {
+                          posthog.capture("Project Live Click", {
                             project: project.title,
                           })
                         }

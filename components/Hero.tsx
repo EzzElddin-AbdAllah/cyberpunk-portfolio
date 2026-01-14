@@ -1,7 +1,7 @@
 import DecryptText from "@/components/DecryptText";
 import IDCard from "@/components/Hero/IDCard";
 import Terminal from "@/components/Hero/Terminal";
-import { track } from "@vercel/analytics";
+import posthog from "posthog-js";
 import { motion, useMotionValue } from "framer-motion";
 import { ChevronRight, Cpu, Wifi } from "lucide-react";
 import { useRef } from "react";
@@ -99,7 +99,7 @@ const Hero = () => {
               >
                 <a
                   href="#projects"
-                  onClick={() => track("Hero Access Projects Click")}
+                  onClick={() => posthog.capture("Hero Access Projects Click")}
                   className="w-full sm:w-fit px-8 py-4 bg-cyber-cyan text-black font-display font-bold text-lg tracking-widest cyber-clip-button hover:bg-white hover:shadow-[0_0_30px_rgba(0,240,255,0.4)] transition-all flex items-center justify-center gap-3 group"
                 >
                   <Cpu size={20} />

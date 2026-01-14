@@ -1,6 +1,6 @@
 import DecryptText from "@/components/DecryptText";
 import { EXPERIENCE } from "@/constants";
-import { track } from "@vercel/analytics";
+import posthog from "posthog-js";
 import { motion } from "framer-motion";
 
 const Experience = () => {
@@ -77,7 +77,7 @@ const Experience = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() =>
-                            track("Experience Link Click", {
+                            posthog.capture("Experience Link Click", {
                               label: link.label,
                               company: job.company,
                             })

@@ -1,4 +1,4 @@
-import { track } from "@vercel/analytics";
+import posthog from "posthog-js";
 import { motion } from "framer-motion";
 import { Download, Fingerprint } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -279,7 +279,7 @@ const IDCard = () => {
             href="/EzzElddin AbdAllah Front End Engineer CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => track("CV Download Click")}
+            onClick={() => posthog.capture("CV Download Click")}
             className="w-full max-sm:px-8 py-4 border border-cyber-cyan text-cyber-cyan font-display font-bold text-base sm:text-lg tracking-widest cyber-clip-button hover:bg-cyber-cyan/10 transition-colors flex items-center justify-center gap-3 relative overflow-hidden group whitespace-nowrap"
           >
             <span className="relative z-10 flex items-center gap-2">

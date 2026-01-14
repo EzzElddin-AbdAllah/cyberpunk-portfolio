@@ -11,7 +11,6 @@ import Projects from "@/components/Projects";
 import ScrollProgress from "@/components/ScrollProgress";
 import Skills from "@/components/Skills";
 import SystemMonitor from "@/components/SystemMonitor";
-import { Analytics } from "@vercel/analytics/react";
 
 const App = () => {
   return (
@@ -32,7 +31,6 @@ const App = () => {
         </main>
         <Contact />
       </div>
-      <Analytics />
     </AudioProvider>
   );
 };

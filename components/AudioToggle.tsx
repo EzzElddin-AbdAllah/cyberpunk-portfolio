@@ -1,5 +1,5 @@
 import { useAudio } from "@/components/AudioManager";
-import { track } from "@vercel/analytics";
+import posthog from "posthog-js";
 import { motion } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 
@@ -9,7 +9,7 @@ const AudioToggle = () => {
   const handleClick = () => {
     playClick();
     toggleMute();
-    track("Audio Toggle", { status: isMuted ? "Unmuted" : "Muted" });
+    posthog.capture("Audio Toggle", { status: isMuted ? "Unmuted" : "Muted" });
   };
 
   return (

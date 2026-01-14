@@ -1,4 +1,4 @@
-import { track } from "@vercel/analytics";
+import posthog from "posthog-js";
 import { motion } from "framer-motion";
 import {
   ChevronRight,
@@ -368,7 +368,9 @@ const Terminal = () => {
                     onClick={(e) => {
                       e.stopPropagation();
                       setTerminalMode("minimized");
-                      track("Terminal Control Click", { action: "Minimize" });
+                      posthog.capture("Terminal Control Click", {
+                        action: "Minimize",
+                      });
                     }}
                     onMouseDown={(e) => e.stopPropagation()}
                     className="hover:text-cyber-yellow transition-colors p-1 relative z-20"
@@ -381,7 +383,9 @@ const Terminal = () => {
                     onClick={(e) => {
                       e.stopPropagation();
                       setTerminalMode("normal");
-                      track("Terminal Control Click", { action: "Restore" });
+                      posthog.capture("Terminal Control Click", {
+                        action: "Restore",
+                      });
                     }}
                     onMouseDown={(e) => e.stopPropagation()}
                     className="hover:text-cyber-cyan transition-colors p-1 relative z-20"
@@ -394,7 +398,9 @@ const Terminal = () => {
                   onClick={(e) => {
                     e.stopPropagation();
                     resetTerminal();
-                    track("Terminal Control Click", { action: "Reset" });
+                    posthog.capture("Terminal Control Click", {
+                      action: "Reset",
+                    });
                   }}
                   onMouseDown={(e) => e.stopPropagation()}
                   className="hover:text-red-400 transition-colors p-1 relative z-20"
@@ -481,7 +487,7 @@ const Terminal = () => {
               key={cmd}
               onClick={() => {
                 simulateTyping(cmd);
-                track("Quick Script Execution", { command: cmd });
+                posthog.capture("Quick Script Execution", { command: cmd });
               }}
               disabled={isTyping}
               className="text-xs font-mono px-3 py-1.5 border border-cyber-dim text-cyber-cyan bg-cyber-dim/20 hover:bg-cyber-cyan hover:text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed"

@@ -1,5 +1,5 @@
 import { CONTACT_INFO } from "@/constants";
-import { track } from "@vercel/analytics";
+import posthog from "posthog-js";
 import { AnimatePresence, motion } from "framer-motion";
 import { Github, Linkedin, Mail, Menu, Terminal, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -38,7 +38,7 @@ const Navbar = () => {
           {/* Logo / ID */}
           <div
             className="flex items-center gap-2 group cursor-pointer"
-            onClick={() => track("Navbar Logo Click")}
+            onClick={() => posthog.capture("Navbar Logo Click")}
           >
             <div className="w-8 h-8 bg-cyber-cyan text-black flex items-center justify-center font-bold cyber-clip hover:bg-cyber-pink transition-colors duration-300">
               EA
@@ -60,7 +60,7 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={() =>
-                  track("Nav Link Click", {
+                  posthog.capture("Nav Link Click", {
                     name: link.name,
                     source: "Desktop",
                   })
@@ -81,7 +81,7 @@ const Navbar = () => {
                 href={CONTACT_INFO.github}
                 target="_blank"
                 onClick={() =>
-                  track("Social Link Click", {
+                  posthog.capture("Social Link Click", {
                     platform: "GitHub",
                     source: "Navbar",
                   })
@@ -94,7 +94,7 @@ const Navbar = () => {
                 href={CONTACT_INFO.linkedin}
                 target="_blank"
                 onClick={() =>
-                  track("Social Link Click", {
+                  posthog.capture("Social Link Click", {
                     platform: "LinkedIn",
                     source: "Navbar",
                   })
@@ -106,7 +106,7 @@ const Navbar = () => {
             </div>
             <a
               href="#contact"
-              onClick={() => track("Initiate Button Click")}
+              onClick={() => posthog.capture("Initiate Button Click")}
               className="px-6 py-2 bg-transparent border border-cyber-cyan text-cyber-cyan text-xs font-bold tracking-widest hover:bg-cyber-cyan hover:text-black transition-all duration-300 cyber-clip-button relative group overflow-hidden"
             >
               <span className="relative z-10">INITIATE</span>
@@ -119,7 +119,7 @@ const Navbar = () => {
             className="md:hidden text-cyber-cyan border border-cyber-cyan p-1"
             onClick={() => {
               setIsMobileMenuOpen(true);
-              track("Mobile Menu Opened");
+              posthog.capture("Mobile Menu Opened");
             }}
           >
             <Menu size={24} />
@@ -149,7 +149,7 @@ const Navbar = () => {
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  track("Mobile Menu Closed");
+                  posthog.capture("Mobile Menu Closed");
                 }}
                 className="text-cyber-pink w-10 h-10 border border-cyber-pink/30 flex items-center justify-center"
               >
@@ -167,7 +167,7 @@ const Navbar = () => {
                   transition={{ delay: index * 0.1 }}
                   onClick={() => {
                     setIsMobileMenuOpen(false);
-                    track("Nav Link Click", {
+                    posthog.capture("Nav Link Click", {
                       name: link.name,
                       source: "Mobile",
                     });
@@ -194,7 +194,7 @@ const Navbar = () => {
                     href={CONTACT_INFO.github}
                     target="_blank"
                     onClick={() =>
-                      track("Social Link Click", {
+                      posthog.capture("Social Link Click", {
                         platform: "GitHub",
                         source: "Mobile Menu",
                       })
@@ -207,7 +207,7 @@ const Navbar = () => {
                     href={CONTACT_INFO.linkedin}
                     target="_blank"
                     onClick={() =>
-                      track("Social Link Click", {
+                      posthog.capture("Social Link Click", {
                         platform: "LinkedIn",
                         source: "Mobile Menu",
                       })
@@ -219,7 +219,7 @@ const Navbar = () => {
                   <a
                     href={`mailto:${CONTACT_INFO.email}`}
                     onClick={() =>
-                      track("Social Link Click", {
+                      posthog.capture("Social Link Click", {
                         platform: "Email",
                         source: "Mobile Menu",
                       })
@@ -235,7 +235,9 @@ const Navbar = () => {
                 href="#contact"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  track("Initiate Connection Click", { source: "Mobile Menu" });
+                  posthog.capture("Initiate Connection Click", {
+                    source: "Mobile Menu",
+                  });
                 }}
                 className="w-full flex items-center justify-center gap-2 py-4 bg-cyber-cyan text-black font-bold tracking-[0.2em] cyber-clip-button"
               >

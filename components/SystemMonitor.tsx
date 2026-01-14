@@ -1,5 +1,5 @@
 import { useAudio } from "@/components/AudioManager";
-import { track } from "@vercel/analytics";
+import posthog from "posthog-js";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity,
@@ -130,20 +130,20 @@ const SystemMonitor = () => {
     playClick();
     const newState = !isMinimized;
     setIsMinimized(newState);
-    track("System Monitor " + (newState ? "Minimized" : "Maximized"));
+    posthog.capture("System Monitor " + (newState ? "Minimized" : "Maximized"));
   };
 
   const handleClose = () => {
     playClick();
     setIsVisible(false);
-    track("System Monitor Closed");
+    posthog.capture("System Monitor Closed");
   };
 
   const handleOpen = () => {
     playClick();
     setPosition({ x: 20, y: window.innerHeight - 200 });
     setIsVisible(true);
-    track("System Monitor Opened");
+    posthog.capture("System Monitor Opened");
   };
 
   if (!mounted) return null;
