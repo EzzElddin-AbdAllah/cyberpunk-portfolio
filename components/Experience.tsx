@@ -1,8 +1,9 @@
 import DecryptText from "@/components/DecryptText";
 import { EXPERIENCE } from "@/constants";
+import { track } from "@vercel/analytics";
 import { motion } from "framer-motion";
 
-const Experience= () => {
+const Experience = () => {
   return (
     <section
       id="experience"
@@ -60,7 +61,11 @@ const Experience= () => {
                       <DecryptText speed={10} text={job.role} />
                     </h3>
                     <div className="text-cyber-pink font-bold mt-1">
-                      <DecryptText speed={10} text={`@${job.company}`} delay={400} />
+                      <DecryptText
+                        speed={10}
+                        text={`@${job.company}`}
+                        delay={400}
+                      />
                     </div>
                   </div>
                   {job.links && (
@@ -71,6 +76,12 @@ const Experience= () => {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() =>
+                            track("Experience Link Click", {
+                              label: link.label,
+                              company: job.company,
+                            })
+                          }
                           className="text-[10px] font-mono px-2 py-1 border border-cyber-cyan/30 text-cyber-cyan hover:bg-cyber-cyan hover:text-black transition-all"
                         >
                           {link.label}
@@ -94,7 +105,11 @@ const Experience= () => {
                           {isSubItem ? "•" : ">>"}
                         </span>
                         <p>
-                          <DecryptText text={desc.trim()} speed={10} delay={600} />
+                          <DecryptText
+                            text={desc.trim()}
+                            speed={10}
+                            delay={600}
+                          />
                         </p>
                       </div>
                     );

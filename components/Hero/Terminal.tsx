@@ -1,5 +1,12 @@
+import { track } from "@vercel/analytics";
 import { motion } from "framer-motion";
-import { ChevronRight, Minimize2, Square, Terminal as TerminalIcon, X } from "lucide-react";
+import {
+  ChevronRight,
+  Minimize2,
+  Square,
+  Terminal as TerminalIcon,
+  X,
+} from "lucide-react";
 import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { Rnd } from "react-rnd";
 import { useAudio } from "../AudioManager";
@@ -40,7 +47,8 @@ const Terminal = () => {
 
   useEffect(() => {
     if (terminalEndRef.current) {
-      const scrollContainer = terminalEndRef.current.closest(".overflow-y-auto");
+      const scrollContainer =
+        terminalEndRef.current.closest(".overflow-y-auto");
       if (scrollContainer) {
         scrollContainer.scrollTo({
           top: (scrollContainer as HTMLElement).scrollHeight,
@@ -105,14 +113,30 @@ const Terminal = () => {
           id: Date.now() + 1,
           content: (
             <div className="grid grid-cols-1 gap-1 text-cyber-cyan/80">
-              <div><span className="text-white">whoami</span> - System identity</div>
-              <div><span className="text-white">edu</span> - Academic records</div>
-              <div><span className="text-white">work</span> - Professional logs</div>
-              <div><span className="text-white">skills</span> - Tech modules</div>
-              <div><span className="text-white">proj</span> - Project database</div>
-              <div><span className="text-white">certs</span> - Certifications</div>
-              <div><span className="text-white">msg</span> - Open comms</div>
-              <div><span className="text-white">clear</span> - Reset terminal</div>
+              <div>
+                <span className="text-white">whoami</span> - System identity
+              </div>
+              <div>
+                <span className="text-white">edu</span> - Academic records
+              </div>
+              <div>
+                <span className="text-white">work</span> - Professional logs
+              </div>
+              <div>
+                <span className="text-white">skills</span> - Tech modules
+              </div>
+              <div>
+                <span className="text-white">proj</span> - Project database
+              </div>
+              <div>
+                <span className="text-white">certs</span> - Certifications
+              </div>
+              <div>
+                <span className="text-white">msg</span> - Open comms
+              </div>
+              <div>
+                <span className="text-white">clear</span> - Reset terminal
+              </div>
             </div>
           ),
         };
@@ -124,42 +148,140 @@ const Terminal = () => {
           id: Date.now() + 1,
           content: (
             <div className="space-y-1 my-2">
-              <div><span className="text-cyber-pink">{">>"}</span> Identity: <span className="text-white font-bold tracking-wider">EzzElddin Abdallah</span></div>
-              <div><span className="text-cyber-pink">{">>"}</span> Role: <span className="text-cyber-cyan">Front-End Engineer</span></div>
-              <div><span className="text-cyber-pink">{">>"}</span> Objective: Architecting accessible, high-performance web interfaces.</div>
-              <div><span className="text-cyber-pink">{">>"}</span> Status: <span className="text-green-400 animate-pulse">ONLINE</span></div>
+              <div>
+                <span className="text-cyber-pink">{">>"}</span> Identity:{" "}
+                <span className="text-white font-bold tracking-wider">
+                  EzzElddin Abdallah
+                </span>
+              </div>
+              <div>
+                <span className="text-cyber-pink">{">>"}</span> Role:{" "}
+                <span className="text-cyber-cyan">Front-End Engineer</span>
+              </div>
+              <div>
+                <span className="text-cyber-pink">{">>"}</span> Objective:
+                Architecting accessible, high-performance web interfaces.
+              </div>
+              <div>
+                <span className="text-cyber-pink">{">>"}</span> Status:{" "}
+                <span className="text-green-400 animate-pulse">ONLINE</span>
+              </div>
             </div>
           ),
         };
         break;
       case "edu":
       case "education":
-        response = { type: "output", id: Date.now() + 1, content: <span className="text-cyber-yellow">{">>"} Jumping to academic records...</span> };
-        setTimeout(() => document.getElementById("education")?.scrollIntoView({ behavior: "smooth" }), 800);
+        response = {
+          type: "output",
+          id: Date.now() + 1,
+          content: (
+            <span className="text-cyber-yellow">
+              {">>"} Jumping to academic records...
+            </span>
+          ),
+        };
+        setTimeout(
+          () =>
+            document
+              .getElementById("education")
+              ?.scrollIntoView({ behavior: "smooth" }),
+          800
+        );
         break;
       case "work":
       case "experience":
-        response = { type: "output", id: Date.now() + 1, content: <span className="text-cyber-yellow">{">>"} Opening professional logs...</span> };
-        setTimeout(() => document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" }), 800);
+        response = {
+          type: "output",
+          id: Date.now() + 1,
+          content: (
+            <span className="text-cyber-yellow">
+              {">>"} Opening professional logs...
+            </span>
+          ),
+        };
+        setTimeout(
+          () =>
+            document
+              .getElementById("experience")
+              ?.scrollIntoView({ behavior: "smooth" }),
+          800
+        );
         break;
       case "certs":
       case "courses":
-        response = { type: "output", id: Date.now() + 1, content: <span className="text-cyber-yellow">{">>"} Scanning certifications...</span> };
-        setTimeout(() => document.getElementById("courses")?.scrollIntoView({ behavior: "smooth" }), 800);
+        response = {
+          type: "output",
+          id: Date.now() + 1,
+          content: (
+            <span className="text-cyber-yellow">
+              {">>"} Scanning certifications...
+            </span>
+          ),
+        };
+        setTimeout(
+          () =>
+            document
+              .getElementById("courses")
+              ?.scrollIntoView({ behavior: "smooth" }),
+          800
+        );
         break;
       case "proj":
       case "projects":
-        response = { type: "output", id: Date.now() + 1, content: <span className="text-cyber-yellow">{">>"} Accessing project database...</span> };
-        setTimeout(() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }), 800);
+        response = {
+          type: "output",
+          id: Date.now() + 1,
+          content: (
+            <span className="text-cyber-yellow">
+              {">>"} Accessing project database...
+            </span>
+          ),
+        };
+        setTimeout(
+          () =>
+            document
+              .getElementById("projects")
+              ?.scrollIntoView({ behavior: "smooth" }),
+          800
+        );
         break;
       case "skills":
-        response = { type: "output", id: Date.now() + 1, content: <span className="text-cyber-yellow">{">>"} Analyzing tech stack...</span> };
-        setTimeout(() => document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" }), 800);
+        response = {
+          type: "output",
+          id: Date.now() + 1,
+          content: (
+            <span className="text-cyber-yellow">
+              {">>"} Analyzing tech stack...
+            </span>
+          ),
+        };
+        setTimeout(
+          () =>
+            document
+              .getElementById("skills")
+              ?.scrollIntoView({ behavior: "smooth" }),
+          800
+        );
         break;
       case "msg":
       case "contact":
-        response = { type: "output", id: Date.now() + 1, content: <span className="text-cyber-yellow">{">>"} Initializing secure channel...</span> };
-        setTimeout(() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }), 800);
+        response = {
+          type: "output",
+          id: Date.now() + 1,
+          content: (
+            <span className="text-cyber-yellow">
+              {">>"} Initializing secure channel...
+            </span>
+          ),
+        };
+        setTimeout(
+          () =>
+            document
+              .getElementById("contact")
+              ?.scrollIntoView({ behavior: "smooth" }),
+          800
+        );
         break;
       case "clear":
         setLogs([]);
@@ -170,11 +292,17 @@ const Terminal = () => {
         response = {
           type: "output",
           id: Date.now() + 1,
-          content: <span className="text-red-500">Command not found: {cmd}. Type 'help' for available commands.</span>,
+          content: (
+            <span className="text-red-500">
+              Command not found: {cmd}. Type 'help' for available commands.
+            </span>
+          ),
         };
     }
 
-    setLogs((prev) => (response ? [...prev, newLogInput, response] : [...prev, newLogInput]));
+    setLogs((prev) =>
+      response ? [...prev, newLogInput, response] : [...prev, newLogInput]
+    );
   }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -192,11 +320,18 @@ const Terminal = () => {
           disableDragging={false}
           enableResizing={terminalMode === "normal"}
           position={terminalPosition}
-          size={terminalMode === "minimized" ? { width: 320, height: 42 } : terminalSize}
+          size={
+            terminalMode === "minimized"
+              ? { width: 320, height: 42 }
+              : terminalSize
+          }
           onDragStop={(e, d) => setTerminalPosition({ x: d.x, y: d.y })}
           onResizeStop={(e, direction, ref, delta, position) => {
             if (terminalMode === "normal") {
-              setTerminalSize({ width: ref.style.width, height: ref.style.height });
+              setTerminalSize({
+                width: ref.style.width,
+                height: ref.style.height,
+              });
               setTerminalPosition(position);
             }
           }}
@@ -230,7 +365,11 @@ const Terminal = () => {
               <div className="flex gap-2 text-slate-500">
                 {terminalMode === "normal" ? (
                   <button
-                    onClick={(e) => { e.stopPropagation(); setTerminalMode("minimized"); }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setTerminalMode("minimized");
+                      track("Terminal Control Click", { action: "Minimize" });
+                    }}
                     onMouseDown={(e) => e.stopPropagation()}
                     className="hover:text-cyber-yellow transition-colors p-1 relative z-20"
                     title="Minimize"
@@ -239,7 +378,11 @@ const Terminal = () => {
                   </button>
                 ) : (
                   <button
-                    onClick={(e) => { e.stopPropagation(); setTerminalMode("normal"); }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setTerminalMode("normal");
+                      track("Terminal Control Click", { action: "Restore" });
+                    }}
                     onMouseDown={(e) => e.stopPropagation()}
                     className="hover:text-cyber-cyan transition-colors p-1 relative z-20"
                     title="Restore"
@@ -248,7 +391,11 @@ const Terminal = () => {
                   </button>
                 )}
                 <button
-                  onClick={(e) => { e.stopPropagation(); resetTerminal(); }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    resetTerminal();
+                    track("Terminal Control Click", { action: "Reset" });
+                  }}
                   onMouseDown={(e) => e.stopPropagation()}
                   className="hover:text-red-400 transition-colors p-1 relative z-20"
                   title="Reset Position"
@@ -259,13 +406,35 @@ const Terminal = () => {
             </div>
 
             {/* Body */}
-            <div className={`flex-1 overflow-hidden transition-opacity duration-300 ${terminalMode === "minimized" ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-              <div className="p-5 h-full overflow-y-auto font-mono text-sm leading-relaxed scrollbar-thin scrollbar-thumb-cyber-cyan/30 scrollbar-track-transparent" onClick={() => inputRef.current?.focus()}>
+            <div
+              className={`flex-1 overflow-hidden transition-opacity duration-300 ${
+                terminalMode === "minimized"
+                  ? "opacity-0 pointer-events-none"
+                  : "opacity-100"
+              }`}
+            >
+              <div
+                className="p-5 h-full overflow-y-auto font-mono text-sm leading-relaxed scrollbar-thin scrollbar-thumb-cyber-cyan/30 scrollbar-track-transparent"
+                onClick={() => inputRef.current?.focus()}
+              >
                 <div className="space-y-2">
                   {logs.map((log) => (
-                    <div key={log.id} className={`${log.type === "system" ? "text-slate-500 italic" : ""}`}>
-                      {log.type === "input" && <span className="text-cyber-pink mr-2">root@ezz:~$</span>}
-                      <span className={log.type === "input" ? "text-white" : ""}>{log.content}</span>
+                    <div
+                      key={log.id}
+                      className={`${
+                        log.type === "system" ? "text-slate-500 italic" : ""
+                      }`}
+                    >
+                      {log.type === "input" && (
+                        <span className="text-cyber-pink mr-2">
+                          root@ezz:~$
+                        </span>
+                      )}
+                      <span
+                        className={log.type === "input" ? "text-white" : ""}
+                      >
+                        {log.content}
+                      </span>
                     </div>
                   ))}
                   <div className="flex items-center">
@@ -274,7 +443,10 @@ const Terminal = () => {
                       ref={inputRef}
                       type="text"
                       value={inputVal}
-                      onChange={(e) => { setInputVal(e.target.value); playType(); }}
+                      onChange={(e) => {
+                        setInputVal(e.target.value);
+                        playType();
+                      }}
                       onKeyDown={handleKeyDown}
                       disabled={isTyping}
                       className="bg-transparent border-none outline-none text-white w-full cursor-text caret-cyber-cyan"
@@ -288,7 +460,7 @@ const Terminal = () => {
             </div>
 
             {/* Scanline overlay */}
-            <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 bg-[length:100%_2px,3px_100%] opacity-20 pointer-events-none"></div>
+            <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 bg-[length:100%_2px,3px_100%] opacity-20"></div>
           </motion.div>
         </Rnd>
       </div>
@@ -303,24 +475,21 @@ const Terminal = () => {
         <span className="text-xs font-mono text-slate-500 flex items-center gap-2 tracking-wider">
           QUICK_SCRIPTS <ChevronRight size={12} />
         </span>
-        {[
-          "whoami",
-          "edu",
-          "work",
-          "skills",
-          "proj",
-          "certs",
-          "msg",
-        ].map((cmd) => (
-          <button
-            key={cmd}
-            onClick={() => simulateTyping(cmd)}
-            disabled={isTyping}
-            className="text-xs font-mono px-3 py-1.5 border border-cyber-dim text-cyber-cyan bg-cyber-dim/20 hover:bg-cyber-cyan hover:text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            ./{cmd}.sh
-          </button>
-        ))}
+        {["whoami", "edu", "work", "skills", "proj", "certs", "msg"].map(
+          (cmd) => (
+            <button
+              key={cmd}
+              onClick={() => {
+                simulateTyping(cmd);
+                track("Quick Script Execution", { command: cmd });
+              }}
+              disabled={isTyping}
+              className="text-xs font-mono px-3 py-1.5 border border-cyber-dim text-cyber-cyan bg-cyber-dim/20 hover:bg-cyber-cyan hover:text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              ./{cmd}.sh
+            </button>
+          )
+        )}
       </motion.div>
     </>
   );

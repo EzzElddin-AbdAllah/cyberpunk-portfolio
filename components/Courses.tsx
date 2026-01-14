@@ -1,4 +1,5 @@
 import { COURSES } from "@/constants";
+import { track } from "@vercel/analytics";
 import { motion } from "framer-motion";
 import { BookOpen, ExternalLink } from "lucide-react";
 
@@ -67,6 +68,7 @@ const Courses = () => {
                     href={course.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => track("Course Click", { name: course.name })}
                     className="flex items-center gap-4 p-4 border border-white/5 bg-white/[0.02] hover:bg-cyber-pink/5 hover:border-cyber-pink/30 transition-all duration-300 group cursor-pointer h-full"
                   >
                     {Content}

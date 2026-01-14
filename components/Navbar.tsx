@@ -1,9 +1,10 @@
 import { CONTACT_INFO } from "@/constants";
+import { track } from "@vercel/analytics";
 import { AnimatePresence, motion } from "framer-motion";
 import { Github, Linkedin, Mail, Menu, Terminal, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const Navbar= () => {
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -35,7 +36,10 @@ const Navbar= () => {
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Logo / ID */}
-          <div className="flex items-center gap-2 group cursor-pointer">
+          <div
+            className="flex items-center gap-2 group cursor-pointer"
+            onClick={() => track("Navbar Logo Click")}
+          >
             <div className="w-8 h-8 bg-cyber-cyan text-black flex items-center justify-center font-bold cyber-clip hover:bg-cyber-pink transition-colors duration-300">
               EA
             </div>
@@ -55,6 +59,12 @@ const Navbar= () => {
               <a
                 key={link.name}
                 href={link.href}
+                onClick={() =>
+                  track("Nav Link Click", {
+                    name: link.name,
+                    source: "Desktop",
+                  })
+                }
                 className="relative px-4 py-2 text-[10px] font-bold text-slate-400 hover:text-cyber-cyan transition-colors tracking-widest group overflow-hidden"
               >
                 <span className="relative z-10">{link.name}</span>
@@ -70,6 +80,12 @@ const Navbar= () => {
               <a
                 href={CONTACT_INFO.github}
                 target="_blank"
+                onClick={() =>
+                  track("Social Link Click", {
+                    platform: "GitHub",
+                    source: "Navbar",
+                  })
+                }
                 className="text-cyber-cyan hover:text-cyber-pink transition-colors hover:drop-shadow-[0_0_5px_rgba(255,0,60,0.8)]"
               >
                 <Github size={20} />
@@ -77,6 +93,12 @@ const Navbar= () => {
               <a
                 href={CONTACT_INFO.linkedin}
                 target="_blank"
+                onClick={() =>
+                  track("Social Link Click", {
+                    platform: "LinkedIn",
+                    source: "Navbar",
+                  })
+                }
                 className="text-cyber-cyan hover:text-cyber-pink transition-colors hover:drop-shadow-[0_0_5px_rgba(255,0,60,0.8)]"
               >
                 <Linkedin size={20} />
@@ -84,6 +106,7 @@ const Navbar= () => {
             </div>
             <a
               href="#contact"
+              onClick={() => track("Initiate Button Click")}
               className="px-6 py-2 bg-transparent border border-cyber-cyan text-cyber-cyan text-xs font-bold tracking-widest hover:bg-cyber-cyan hover:text-black transition-all duration-300 cyber-clip-button relative group overflow-hidden"
             >
               <span className="relative z-10">INITIATE</span>
@@ -94,7 +117,10 @@ const Navbar= () => {
           {/* Mobile Toggle */}
           <button
             className="md:hidden text-cyber-cyan border border-cyber-cyan p-1"
-            onClick={() => setIsMobileMenuOpen(true)}
+            onClick={() => {
+              setIsMobileMenuOpen(true);
+              track("Mobile Menu Opened");
+            }}
           >
             <Menu size={24} />
           </button>
@@ -121,7 +147,10 @@ const Navbar= () => {
                 </span>
               </div>
               <button
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  track("Mobile Menu Closed");
+                }}
                 className="text-cyber-pink w-10 h-10 border border-cyber-pink/30 flex items-center justify-center"
               >
                 <X size={24} />
@@ -136,7 +165,13 @@ const Navbar= () => {
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: index * 0.1 }}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    track("Nav Link Click", {
+                      name: link.name,
+                      source: "Mobile",
+                    });
+                  }}
                   className="group flex items-center justify-between p-4 border border-white/5 bg-white/5 cyber-clip-button"
                 >
                   <span className="text-2xl font-display font-bold text-white group-hover:text-cyber-cyan transition-colors">
@@ -157,18 +192,38 @@ const Navbar= () => {
                 <div className="flex gap-6 justify-center">
                   <a
                     href={CONTACT_INFO.github}
+                    target="_blank"
+                    onClick={() =>
+                      track("Social Link Click", {
+                        platform: "GitHub",
+                        source: "Mobile Menu",
+                      })
+                    }
                     className="text-cyber-cyan hover:text-white transition-colors"
                   >
                     <Github size={24} />
                   </a>
                   <a
                     href={CONTACT_INFO.linkedin}
+                    target="_blank"
+                    onClick={() =>
+                      track("Social Link Click", {
+                        platform: "LinkedIn",
+                        source: "Mobile Menu",
+                      })
+                    }
                     className="text-cyber-cyan hover:text-white transition-colors"
                   >
                     <Linkedin size={24} />
                   </a>
                   <a
                     href={`mailto:${CONTACT_INFO.email}`}
+                    onClick={() =>
+                      track("Social Link Click", {
+                        platform: "Email",
+                        source: "Mobile Menu",
+                      })
+                    }
                     className="text-cyber-cyan hover:text-white transition-colors"
                   >
                     <Mail size={24} />
@@ -178,7 +233,10 @@ const Navbar= () => {
 
               <a
                 href="#contact"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  track("Initiate Connection Click", { source: "Mobile Menu" });
+                }}
                 className="w-full flex items-center justify-center gap-2 py-4 bg-cyber-cyan text-black font-bold tracking-[0.2em] cyber-clip-button"
               >
                 <Terminal size={18} />

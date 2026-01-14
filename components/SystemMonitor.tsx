@@ -1,6 +1,15 @@
 import { useAudio } from "@/components/AudioManager";
+import { track } from "@vercel/analytics";
 import { AnimatePresence, motion } from "framer-motion";
-import { Activity, Cpu, HardDrive, Minimize2, Square, Wifi, X } from "lucide-react";
+import {
+  Activity,
+  Cpu,
+  HardDrive,
+  Minimize2,
+  Square,
+  Wifi,
+  X,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Rnd } from "react-rnd";
@@ -21,7 +30,7 @@ const SystemMonitor = () => {
   const [ramUsage, setRamUsage] = useState(0);
   const [ping, setPing] = useState(42);
   const [uptime, setUptime] = useState(0);
-  
+
   const lastMousePos = useRef({ x: 0, y: 0 });
   const lastTime = useRef(Date.now());
   const velocityBuffer = useRef<number[]>([]);
@@ -58,7 +67,9 @@ const SystemMonitor = () => {
 
     const cpuInterval = setInterval(() => {
       if (velocityBuffer.current.length > 0) {
-        const avgVelocity = velocityBuffer.current.reduce((a, b) => a + b, 0) / velocityBuffer.current.length;
+        const avgVelocity =
+          velocityBuffer.current.reduce((a, b) => a + b, 0) /
+          velocityBuffer.current.length;
         const normalizedCpu = Math.min(100, avgVelocity * 40);
         setCpuUsage((prev) => prev * 0.8 + normalizedCpu * 0.2);
       } else {
@@ -96,7 +107,9 @@ const SystemMonitor = () => {
     const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    return `${hrs.toString().padStart(2, "0")}:${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+    return `${hrs.toString().padStart(2, "0")}:${mins
+      .toString()
+      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   const getStatusColor = (value: number, type: "cpu" | "ping") => {
@@ -115,18 +128,22 @@ const SystemMonitor = () => {
 
   const handleToggleMinimize = () => {
     playClick();
-    setIsMinimized(!isMinimized);
+    const newState = !isMinimized;
+    setIsMinimized(newState);
+    track("System Monitor " + (newState ? "Minimized" : "Maximized"));
   };
 
   const handleClose = () => {
     playClick();
     setIsVisible(false);
+    track("System Monitor Closed");
   };
 
   const handleOpen = () => {
     playClick();
     setPosition({ x: 20, y: window.innerHeight - 200 });
     setIsVisible(true);
+    track("System Monitor Opened");
   };
 
   if (!mounted) return null;
@@ -140,7 +157,10 @@ const SystemMonitor = () => {
         onClick={handleOpen}
         title="Open System Monitor"
       >
-        <Activity size={16} className="text-cyber-cyan group-hover:scale-110 transition-transform" />
+        <Activity
+          size={16}
+          className="text-cyber-cyan group-hover:scale-110 transition-transform"
+        />
       </motion.button>,
       document.body
     );
@@ -166,7 +186,9 @@ const SystemMonitor = () => {
           <div className="monitor-header bg-cyber-gray/80 px-3 py-2 flex justify-between items-center border-b border-cyber-dim cursor-grab active:cursor-grabbing">
             <div className="flex items-center gap-2">
               <Activity size={12} className="text-cyber-cyan" />
-              <span className="text-[10px] font-mono text-slate-400 tracking-wider">SYS_MONITOR</span>
+              <span className="text-[10px] font-mono text-slate-400 tracking-wider">
+                SYS_MONITOR
+              </span>
             </div>
             <div className="flex gap-1.5">
               <button
@@ -202,7 +224,9 @@ const SystemMonitor = () => {
                       <Cpu size={10} />
                       <span>CPU</span>
                     </div>
-                    <span className={getStatusColor(cpuUsage, "cpu")}>{cpuUsage.toFixed(1)}%</span>
+                    <span className={getStatusColor(cpuUsage, "cpu")}>
+                      {cpuUsage.toFixed(1)}%
+                    </span>
                   </div>
                   <div className="h-1 bg-cyber-dim/50 overflow-hidden">
                     <motion.div
@@ -220,7 +244,9 @@ const SystemMonitor = () => {
                       <HardDrive size={10} />
                       <span>RAM</span>
                     </div>
-                    <span className="text-cyber-cyan">{ramUsage.toFixed(1)}%</span>
+                    <span className="text-cyber-cyan">
+                      {ramUsage.toFixed(1)}%
+                    </span>
                   </div>
                   <div className="h-1 bg-cyber-dim/50 overflow-hidden">
                     <motion.div
@@ -237,13 +263,17 @@ const SystemMonitor = () => {
                     <Wifi size={10} />
                     <span>PING</span>
                   </div>
-                  <span className={getStatusColor(ping, "ping")}>{ping.toFixed(0)}ms</span>
+                  <span className={getStatusColor(ping, "ping")}>
+                    {ping.toFixed(0)}ms
+                  </span>
                 </div>
 
                 {/* Uptime */}
                 <div className="flex justify-between items-center pt-2 border-t border-cyber-dim/50">
                   <span className="text-slate-500">UPTIME</span>
-                  <span className="text-cyber-yellow">{formatUptime(uptime)}</span>
+                  <span className="text-cyber-yellow">
+                    {formatUptime(uptime)}
+                  </span>
                 </div>
               </motion.div>
             )}

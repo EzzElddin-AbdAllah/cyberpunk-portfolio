@@ -1,4 +1,5 @@
 import { useAudio } from "@/components/AudioManager";
+import { track } from "@vercel/analytics";
 import { motion } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 
@@ -8,6 +9,7 @@ const AudioToggle = () => {
   const handleClick = () => {
     playClick();
     toggleMute();
+    track("Audio Toggle", { status: isMuted ? "Unmuted" : "Muted" });
   };
 
   return (
@@ -24,12 +26,15 @@ const AudioToggle = () => {
         transition={{ duration: 0.3 }}
       >
         {isMuted ? (
-          <VolumeX size={18} className="text-slate-500 group-hover:text-cyber-cyan transition-colors" />
+          <VolumeX
+            size={18}
+            className="text-slate-500 group-hover:text-cyber-cyan transition-colors"
+          />
         ) : (
           <Volume2 size={18} className="text-cyber-cyan" />
         )}
       </motion.div>
-      
+
       {/* Sound wave animation when unmuted */}
       {!isMuted && (
         <motion.div

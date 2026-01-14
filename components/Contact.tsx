@@ -1,4 +1,5 @@
 import { CONTACT_INFO } from "@/constants";
+import { track } from "@vercel/analytics";
 import { Mail, MapPin, Phone, Terminal } from "lucide-react";
 import DecryptText from "./DecryptText";
 
@@ -21,6 +22,7 @@ const Contact = () => {
 
             <a
               href={`mailto:${CONTACT_INFO.email}`}
+              onClick={() => track("Transmit Email Button Clicked")}
               className="inline-flex items-center gap-3 px-8 py-4 bg-cyber-pink/10 border border-cyber-pink text-cyber-pink font-bold tracking-widest hover:bg-cyber-pink hover:text-black transition-all cyber-clip-button group"
             >
               <Terminal size={20} />
@@ -37,6 +39,9 @@ const Contact = () => {
                 </span>
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
+                  onClick={() =>
+                    track("Contact Email Clicked", { source: "Footer" })
+                  }
                   className="text-white hover:text-cyber-cyan transition-colors"
                 >
                   {CONTACT_INFO.email}
@@ -52,6 +57,7 @@ const Contact = () => {
                 </span>
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
+                  onClick={() => track("Contact Phone Clicked")}
                   className="text-white hover:text-cyber-cyan transition-colors"
                 >
                   {CONTACT_INFO.phone}

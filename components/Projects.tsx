@@ -1,5 +1,6 @@
 import DecryptText from "@/components/DecryptText";
 import { PROJECTS } from "@/constants";
+import { track } from "@vercel/analytics";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 
@@ -46,6 +47,8 @@ const Projects = () => {
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-all duration-700 scale-105 group-hover:scale-110 opacity-60 group-hover:opacity-100 mix-blend-luminosity group-hover:mix-blend-normal"
                 />
 
@@ -82,6 +85,11 @@ const Projects = () => {
                         href={project.sourceLink}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                          track("Project Source Click", {
+                            project: project.title,
+                          })
+                        }
                         className="text-slate-500 hover:text-white transition-all hover:scale-110"
                         title="View Source"
                       >
@@ -93,6 +101,11 @@ const Projects = () => {
                         href={project.liveLink}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                          track("Project Live Click", {
+                            project: project.title,
+                          })
+                        }
                         className="text-cyber-cyan/50 hover:text-cyber-cyan transition-all hover:scale-110"
                         title="Live Demo"
                       >
